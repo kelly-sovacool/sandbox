@@ -19,8 +19,8 @@ jobs:
           git config --local user.name "GitHub"
       - name: Fast forward
         run: |
-          echo "the tag is ${{ GITHUB_REF }}"
-          git merge --ff-only ${{ GITHUB_REF }}
+          echo "the tag is ${{ github.ref_name }}"
+          git merge --ff-only ${{ github.ref_name }}
       - name: Push
         uses: ad-m/github-push-action@master
         with:
