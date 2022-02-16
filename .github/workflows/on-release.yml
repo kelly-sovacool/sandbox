@@ -10,7 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          branch: latest-release
+          ref: latest-release
           persist-credentials: false
           fetch-depth: 0
       - name: Configure git
