@@ -16,11 +16,11 @@ jobs:
       id: metadata
       with:
         pattern: docker/(?P<image_dir>)/*.*
-        default-patterns: |
-          meta.yml
-          Dockerfile
+    - name: check matrix
+      run: |
+        echo "${{ steps.metadata.outputs.matrix }}"
   
-  update-docker:
+  echo-matrix:
     needs: [ generate-matrix ]
     strategy:
       matrix: ${{ fromJson(needs.generate-matrix.outputs.matrix-metadata) }}
