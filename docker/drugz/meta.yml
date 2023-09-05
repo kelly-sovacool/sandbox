@@ -1,0 +1,4 @@
+namespace: kelly-sovacool
+image_name: drugz
+version: 0.1.0.90
+container: "$(namespace)/$(image_name):$(version)"

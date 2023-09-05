@@ -20,7 +20,7 @@ jobs:
         default-patterns: |
           meta.yml
           Dockerfile
-          *
+          docker/*/*
   
   update-docker:
     needs: [ generate-matrix ]
@@ -35,8 +35,9 @@ jobs:
         with:
           config: ${{ github.workspace }}/docker/${{ matrix.image_dir }}/meta.yml
       - name: echo meta
+        if: ${{ steps.metadata.outputs['container'] != '' }}
         run: |
-          echo ${{ steps.metadata.outputs['container'] }}
+          echo "metadata exists! ${{ steps.metadata.outputs['container'] }}"
       - name: echo files
         run: |
           echo "image dir ${{ matrix.image_dir }}"
