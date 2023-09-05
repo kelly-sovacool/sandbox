@@ -38,6 +38,7 @@ jobs:
         id: echo-meta
         run: |
           echo "Updating container ${{ steps.metadata.outputs['container'] }} from image dir ${{ matrix.image_dir }}"
+          echo "dockerhub namespace: ${{ steps.metadata.outputs['dockerhub_namespace'] }}"
       - name: Get date
         run: |
           echo "DATE=$(date +"%y%m%d")" >> $GITHUB_ENV
