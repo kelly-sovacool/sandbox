@@ -1,10 +1,10 @@
 name: docker
 
 on:
-  #push:
-  #  paths:
-  #    - .github/workflows/docker.yml
-  #    - "docker/**"
+  push:
+    paths:
+      - .github/workflows/docker.yml
+      - "docker/**"
   workflow_dispatch:
 
 jobs:
@@ -16,7 +16,7 @@ jobs:
     - uses: hellofresh/action-changed-files@v3
       id: metadata
       with:
-        pattern: docker/(?P<image_dir>[^/]+)
+        pattern: docker/(?P<image_dir>\w+)/.*
         default-patterns: |
           meta.yml
           Dockerfile
