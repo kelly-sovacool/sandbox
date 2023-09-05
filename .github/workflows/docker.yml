@@ -16,7 +16,7 @@ jobs:
     - uses: hellofresh/action-changed-files@v3
       id: metadata
       with:
-        pattern: docker/?P<image_name>/meta.yml
+        pattern: docker/(?P<image_name>)/meta.yml
   
   update-docker:
     needs: [ generate-matrix ]
