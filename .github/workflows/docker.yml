@@ -4,11 +4,25 @@ on:
   push:
     paths:
       - .github/workflows/docker.yml
-      - "docker/**"
+      - "docker/*/meta.yml"
   workflow_dispatch:
 
 jobs:
+  changes:
+    runs-on: ubuntu-latest
+    outputs:
+      meta: ${{ steps.changes.outputs.src }}
+    steps:
+    - uses: actions/checkout@v3
+    - uses: dorny/paths-filter@v2
+      id: changes
+      with:
+        filters: |
+          meta:
+            - 'docker/*/meta.yml' 
   update-docker:
+    needs: changes
+    if: ${{ needs.changes.outputs.meta == 'true' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -16,6 +30,9 @@ jobs:
         id: metadata
         with:
           config: ${{ github.workspace }}/docker/bagel/meta.yml
-      - name: echo
+      - name: echo meta
         run: |
           echo ${{ steps.metadata.outputs['container'] }}
+      - name: echo files
+        run: |
+          echo ${{ needs.changes.outputs.meta }}
