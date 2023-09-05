@@ -23,6 +23,7 @@ jobs:
     strategy:
       matrix: ${{ fromJson(needs.generate-matrix.outputs.matrix-metadata) }}
     if: ${{ fromJson(needs.generate-matrix.outputs.matrix-metadata).include[0] }} # skip if the matrix is empty!
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: pietrobolcato/action-read-yaml@1.0.0
