@@ -1,0 +1,33 @@
+name: test-matrix
+
+on:
+  push:
+    paths:
+      - .github/workflows/test-matrix.yml
+  workflow_dispatch:
+
+jobs:
+  generate-matrix:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix-metadata: ${{ steps.metadata.outputs.matrix }}
+    steps:
+    - uses: hellofresh/action-changed-files@v3
+      id: metadata
+      with:
+        pattern: docker/(?P<image_dir>)/*.*
+        default-patterns: |
+          meta.yml
+          Dockerfile
+  
+  update-docker:
+    needs: [ generate-matrix ]
+    strategy:
+      matrix: ${{ fromJson(needs.generate-matrix.outputs.matrix-metadata) }}
+    if: ${{ fromJson(needs.generate-matrix.outputs.matrix-metadata).include[0] }} # skip if the matrix is empty!
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: echo
+        run: |
+          echo "image_dir: ${{ matrix.image_dir }}"
