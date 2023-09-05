@@ -1,4 +1,4 @@
-namespace: kelly-sovacool
+namespace: kellysovacool
 image_name: bagel
 version: 0.1.0
 container: "$(namespace)/$(image_name):$(version)"

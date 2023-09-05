@@ -19,8 +19,8 @@ ENV PATH="${PATH}:/opt2/bagel-2.0-115"
 # Save Dockerfile in the docker
 COPY Dockerfile /opt2/Dockerfile_${REPONAME}.${BUILD_TAG}
 RUN chmod a+r /opt2/Dockerfile_${REPONAME}.${BUILD_TAG}
-COPY argparse.bash /opt2
-RUN chmod -R a+rx /opt2/argparse.bash
+#COPY argparse.bash /opt2
+#RUN chmod -R a+rx /opt2/argparse.bash
 ENV PATH="/opt2/:$PATH"
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
     apt-get autoclean && \
