@@ -38,10 +38,9 @@ jobs:
         id: echo-meta
         run: |
           echo "Updating container ${{ steps.metadata.outputs['container'] }} from image dir ${{ matrix.image_dir }}"
-      - name: update docker
-        if: steps.echo-meta.outcome == 'success'
+      - name: Get date
         run: |
-          echo ""
+          echo "DATE=$(date +"%y%m%d")" >> $GITHUB_ENV
 
       - name: Login to DockerHub
         if: github.event_name != 'pull_request'
@@ -55,3 +54,7 @@ jobs:
           context: docker/${{ matrix.image_dir }}
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.metadata.outputs['container'] }}
+          build-args: |
+            BUILD_DATE=$DATE
+            BUILD_TAG=${{ steps.metadata.outputs['version'] }}
+            REPONAME=${{ steps.metadata.outputs['image_name'] }}
