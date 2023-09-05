@@ -17,8 +17,9 @@ jobs:
       id: metadata
       with:
         pattern: docker/(?P<image_name>[^/]+)
-        default_patterns: |
+        default-patterns: |
           meta.yml
+          Dockerfile
   
   update-docker:
     needs: [ generate-matrix ]
