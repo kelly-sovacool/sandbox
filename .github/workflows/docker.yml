@@ -16,10 +16,11 @@ jobs:
     - uses: hellofresh/action-changed-files@v3
       id: metadata
       with:
-        pattern: docker/(?P<image_name>[^/]+)
+        pattern: docker/(?P<image_dir>[^/]+)
         default-patterns: |
           meta.yml
           Dockerfile
+          *
   
   update-docker:
     needs: [ generate-matrix ]
@@ -32,10 +33,10 @@ jobs:
       - uses: pietrobolcato/action-read-yaml@1.0.0
         id: metadata
         with:
-          config: ${{ github.workspace }}/docker/bagel/meta.yml
+          config: ${{ github.workspace }}/docker/${{ matrix.image_dir }}/meta.yml
       - name: echo meta
         run: |
           echo ${{ steps.metadata.outputs['container'] }}
       - name: echo files
         run: |
-          echo "image name ${{ matrix.image_name }}"
+          echo "image dir ${{ matrix.image_dir }}"
