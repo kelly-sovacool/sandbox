@@ -1,0 +1,21 @@
+name: docker
+
+on:
+  push:
+    paths:
+      - .github/workflows/docker.yml
+      - "docker/**"
+  workflow_dispatch:
+
+jobs:
+  update-docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout#v4
+      - uses: pietrobolcato/action-read-yaml@1.0.0
+        id: metadata
+        with:
+          config: ${{ github.workspace }}/docker/bagel/meta.yml
+      - name: echo
+        run: |
+          echo ${{ steps.metadata.outputs['container'] }}
