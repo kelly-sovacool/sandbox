@@ -15,7 +15,7 @@ jobs:
     - uses: hellofresh/action-changed-files@v3
       id: metadata
       with:
-        pattern: docker/(?P<image_dir>)[^/]+)
+        pattern: docker/(?P<image_dir>[^/]+)
     - name: check matrix
       run: |
         echo "${{ steps.metadata.outputs.matrix }}"
