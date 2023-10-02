@@ -9,7 +9,7 @@ ARG REPONAME="000000"
 ENV REPONAME=${REPONAME}
 
 # insert your layers go here!
-RUN mamba install -c bioconda picard=2.3.0
+RUN mamba install -c bioconda picard=2.27.5
 # apt-install
 # RUN apt-get update \
 #     && apt-get -y upgrade \
