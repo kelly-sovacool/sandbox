@@ -21,7 +21,7 @@ on:
         required: true
       push:
         type: boolean
-        description: Whether to push to DockerHub
+        description: Push to DockerHub
         required: true
 
 jobs:
@@ -35,10 +35,14 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Prepare build-time variables
+        id: vars
+        run: |
+            echo "CONTEXT=$(dirname ${{ github.event.inputs.dockerfile }})" >> GITHUB_OUTPUT
       - name: Build and push
         uses: docker/build-push-action@v4
         with:
-          context: $(dirname ${{ github.event.inputs.dockerfile }})
+          context: ${{ steps.vars.outputs.CONTEXT }}
           file: ${{ github.event.inputs.dockerfile }}
           push: ${{ github.event.inputs.push }}
           tags: ${{ github.event.inputs.namespace }}/${{ github.event.inputs.image_name }}:${{ github.event.inputs.version }}
