@@ -83,10 +83,10 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
 	zlibc 
 
 # Install conda and give write permissions to conda folder
-RUN echo 'export PATH=/opt/conda/bin:$PATH' > /etc/profile.d/conda.sh && \
-    wget --quiet https://repo.continuum.io/miniconda/Miniconda2-4.0.5-Linux-x86_64.sh -O ~/miniconda.sh && \
-    /bin/bash ~/miniconda.sh -b -p /opt/conda && \
-    rm ~/miniconda.sh && chmod 777 -R /opt/conda/
+RUN echo 'export PATH=/opt2/conda/bin:$PATH' > /etc/profile.d/conda.sh && \
+    wget --quiet "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh -O ~/miniforge3.sh && \
+    /bin/bash ~/miniforge3.sh -b -p /opt2/conda && \
+    rm ~/miniforge3.sh && chmod 777 -R /opt2/conda/
 
 
 #fix python
