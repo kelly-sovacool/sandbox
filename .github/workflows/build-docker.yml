@@ -9,11 +9,12 @@ on:
         required: true
       namespace:
         type: string
-        description: namespace on dockerhub, e.g. nciccbr
+        description: namespace on dockerhub. e.g. nciccbr
+        default: kellysovacool
         required: true
       image_name:
         type: string
-        description: container image name, e.g. ccbr_toolname
+        description: container image name. e.g. ccbr_toolname
         required: true
       version:
         type: string
@@ -21,7 +22,7 @@ on:
         required: true
       push:
         type: boolean
-        description: Push to DockerHub
+        description: Push to DockerHub (leave unchecked to just build the container without pushing)
         required: true
 
 jobs:
