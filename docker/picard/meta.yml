@@ -1,0 +1,4 @@
+dockerhub_namespace: kellysovacool
+image_name: picard
+version: v0.0.1
+container: "$(dockerhub_namespace)/$(image_name):$(version)"
