@@ -107,8 +107,8 @@ RUN apt-get install -y r-base r-base-dev r-base-core
 # Save Dockerfile in the docker
 COPY Dockerfile /opt2/Dockerfile_${REPONAME}.${BUILD_TAG}
 RUN chmod a+r /opt2/Dockerfile_${REPONAME}.${BUILD_TAG}
-COPY argparse.bash /opt2
-RUN chmod -R a+rx /opt2/argparse.bash
+#COPY argparse.bash /opt2
+#RUN chmod -R a+rx /opt2/argparse.bash
 ENV PATH="/opt2/:$PATH"
 # conda
 ENV PATH=$PATH:/opt2/conda/bin
