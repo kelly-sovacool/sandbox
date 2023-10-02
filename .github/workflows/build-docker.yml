@@ -40,6 +40,9 @@ jobs:
         id: vars
         run: |
             echo "CONTEXT=$(dirname ${{ github.event.inputs.dockerfile }})" >> GITHUB_OUTPUT
+      - name: debug
+        run: |
+            echo ${{ steps.vars.outputs.CONTEXT }}
       - name: Build and push
         uses: docker/build-push-action@v4
         with:
