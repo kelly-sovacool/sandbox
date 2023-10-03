@@ -5,20 +5,20 @@ on:
     inputs:
       dockerfile:
         type: string
-        description: path to the Dockerfile in the repo
+        description: path to the Dockerfile in the repo (e.g. common/ccbr_bwa/Dockerfile)
         required: true
       namespace:
         type: string
-        description: "namespace on dockerhub. (default: `nciccbr`)"
-        default: kellysovacool
+        description: namespace on dockerhub
         required: true
+        default: nciccbr
       image_name:
         type: string
-        description: container image name. (e.g. ccbr_toolname)
+        description: container image name (e.g. ccbr_toolname)
         required: true
       version:
         type: string
-        description: container version tag. e.g. 1.0.0
+        description: container version tag (e.g. 1.0.0)
         required: true
       push:
         type: boolean
@@ -40,17 +40,18 @@ jobs:
         id: vars
         run: |
             echo "CONTEXT=$(dirname ${{ github.event.inputs.dockerfile }})" >> "$GITHUB_OUTPUT"
+            echo "DATE=$(date +"%Y-%m-%d")" >> "$GITHUB_OUTPUT"
       - name: debug
         run: |
-            echo ${{ steps.vars.outputs.CONTEXT }}
-      - name: Build and push
-        uses: docker/build-push-action@v4
-        with:
-          context: ${{ steps.vars.outputs.CONTEXT }}
-          file: ${{ github.event.inputs.dockerfile }}
-          push: ${{ github.event.inputs.push }}
-          tags: ${{ github.event.inputs.namespace }}/${{ github.event.inputs.image_name }}:${{ github.event.inputs.version }}
-          build-args: |
-            BUILD_DATE=$(date +"%Y-%m-%d")
-            BUILD_TAG=${{ github.event.inputs.version }}
-            REPONAME=${{ github.event.inputs.image_name }}
+            echo ${{ github.event.inputs.push }}
+      # - name: Build and push
+      #   uses: docker/build-push-action@v4
+      #   with:
+      #     context: ${{ steps.vars.outputs.CONTEXT }}
+      #     file: ${{ github.event.inputs.dockerfile }}
+      #     push: ${{ github.event.inputs.push }}
+      #     tags: ${{ github.event.inputs.namespace }}/${{ github.event.inputs.image_name }}:${{ github.event.inputs.version }}
+      #     build-args: |
+      #       BUILD_DATE=${{ steps.vars.outputs.DATE }}
+      #       BUILD_TAG=${{ github.event.inputs.version }}
+      #       REPONAME=${{ github.event.inputs.image_name }}
