@@ -1,3 +1,4 @@
+deno
 pandoc
 quarto
 r-base=4.3.1
