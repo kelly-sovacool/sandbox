@@ -9,6 +9,7 @@ ARG REPONAME="000000"
 ENV REPONAME=${REPONAME}
 
 # install packages from conda environment file
+COPY environment.yml /data2/
 RUN mamba env update -f environment.yml
 
 # Save Dockerfile in the docker
