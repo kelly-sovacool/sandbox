@@ -9,8 +9,8 @@ ARG REPONAME="000000"
 ENV REPONAME=${REPONAME}
 
 # install packages from conda environment file
-COPY environment.yml /data2/
-RUN mamba env update -f environment.yml
+COPY environment.txt /data2/
+RUN mamba install -c conda-forge -c r --file environment.txt
 
 # Save Dockerfile in the docker
 COPY Dockerfile /opt2/Dockerfile_${REPONAME}.${BUILD_TAG}
