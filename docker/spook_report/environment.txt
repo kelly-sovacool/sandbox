@@ -1,6 +1,3 @@
-deno
-pandoc
-quarto
 r-base=4.3.1
 r-knitr
 r-dplyr
