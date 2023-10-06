@@ -17,6 +17,7 @@ ENV QUARTO_VERSION="1.3.450"
 ADD https://github.com/quarto-dev/quarto-cli/releases/download/v${QUARTO_VERSION}/quarto-${QUARTO_VERSION}-linux-amd64.tar.gz /opt2
 WORKDIR /opt2
 RUN tar -xzvf quarto-${QUARTO_VERSION}-linux-amd64.tar.gz
+ENV PATH="${PATH}:~/opt/quarto-${QUARTO_VERSION}/bin/"
 RUN quarto check
 
 # Save Dockerfile in the docker
