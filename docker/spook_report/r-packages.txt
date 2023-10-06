@@ -1,0 +1,16 @@
+knitr
+dplyr
+downlit
+ggplot2
+glue
+here
+janitor
+lubridate
+purrr
+RColorBrewer
+readr
+rmarkdown
+stringr
+tibble
+tidyr
+xml2
