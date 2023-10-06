@@ -16,7 +16,7 @@ RUN mamba install -c conda-forge -c r --file environment.txt
 ENV QUARTO_VERSION="1.3.450"
 ADD https://github.com/quarto-dev/quarto-cli/releases/download/v${QUARTO_VERSION}/quarto-${QUARTO_VERSION}-linux-amd64.tar.gz /opt2
 WORKDIR /opt2
-RUN tar -c . -xzvf quarto-${QUARTO_VERSION}-linux-amd64.tar.gz
+RUN tar -xzvf quarto-${QUARTO_VERSION}-linux-amd64.tar.gz
 RUN quarto check
 
 # Save Dockerfile in the docker
