@@ -10,6 +10,7 @@ r-lubridate
 r-purrr
 r-RColorBrewer
 r-readr
+r-rmarkdown
 r-stringr
 r-tibble
 r-tidyr
