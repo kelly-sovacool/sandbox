@@ -9,8 +9,9 @@ ARG REPONAME="000000"
 ENV REPONAME=${REPONAME}
 
 # install packages from conda environment file
-COPY r-packages.txt /data2/
-RUN R -e 'install.packages(readLines("r-packages.txt"), repos="http://cran.us.r-project.org")'
+COPY environment.txt /data2/
+RUN mamba install -c conda-forge -c r --file environment.txt
+ENV R_LIBS_USER=/opt2/conda/lib/R/library/
 
 # install quarto
 ENV QUARTO_VERSION="1.3.450"
