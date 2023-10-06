@@ -1,4 +1,4 @@
 dockerhub_namespace: kellysovacool
 image_name: spook_report
-version: 0.1.2
+version: 0.1.3
 container: "$(dockerhub_namespace)/$(image_name):$(version)"
