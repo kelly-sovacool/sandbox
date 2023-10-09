@@ -88,11 +88,11 @@ ENV PATH="/opt2/go/bin/:$PATH"
 RUN go get -u github.com/golang/dep/cmd/dep
 
 # install singularity
-RUN export VERSION=3.9.7 && \
+RUN export VERSION=3.9.7 && GO_PATH=/opt2/go \
     mkdir -p $GOPATH/src/github.com/sylabs && \
     cd $GOPATH/src/github.com/sylabs && \
-    wget https://github.com/sylabs/singularity/releases/download/v${VERSION}/singularity-${VERSION}.tar.gz && \
-    tar -xzf singularity-${VERSION}.tar.gz && \
+    wget https://github.com/sylabs/singularity/releases/download/v${VERSION}/singularity-ce-${VERSION}.tar.gz && \
+    tar -xzf singularity-ce-${VERSION}.tar.gz && \
     ./mconfig --prefix /opt2 \
     make -C ./builddir && \
     make -C ./builddir install
