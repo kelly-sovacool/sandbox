@@ -84,8 +84,8 @@ RUN export VERSION=1.11 OS=linux ARCH=amd64 && \
     wget https://dl.google.com/go/go$VERSION.$OS-$ARCH.tar.gz && \
     tar -C /opt2 -xzvf go$VERSION.$OS-$ARCH.tar.gz && \
     rm go$VERSION.$OS-$ARCH.tar.gz
-RUN go get -u github.com/golang/dep/cmd/dep
 ENV PATH="/opt2/go/bin/:$PATH"
+RUN go get -u github.com/golang/dep/cmd/dep
 
 # install singularity
 RUN export VERSION=3.9.7 && \
