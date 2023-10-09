@@ -27,6 +27,6 @@ jobs:
         run: |
           echo ${{ env.full_run }}
       - name: do full run
-        if: ${{ env.full_run}}
+        if: ${{ env.full_run == 'true' }}
         run: |
             echo "full run"
