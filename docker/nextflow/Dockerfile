@@ -83,7 +83,6 @@ RUN export VERSION=1.17 OS=linux ARCH=amd64 && \
     tar -C /opt2 -xzvf go$VERSION.$OS-$ARCH.tar.gz && \
     rm go$VERSION.$OS-$ARCH.tar.gz
 ENV PATH="/opt2/go/bin/:$PATH"
-RUN go get -u github.com/golang/dep/cmd/dep
 
 # install singularity https://docs.sylabs.io/guides/3.0/user-guide/installation.html
 RUN export VERSION=3.10.5 && \
