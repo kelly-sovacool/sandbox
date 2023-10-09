@@ -99,7 +99,7 @@ RUN export VERSION=3.10.5 && \
 
 # install nextflow
 RUN export VERSION=23.04.4 && \
-	wget -qO- https://github.com/nextflow-io/nextflow/releases/download/v${VERSION}nextflow | bash && \
+	wget -qO- https://github.com/nextflow-io/nextflow/releases/download/v${VERSION}/nextflow | bash && \
     chmod +x nextflow && \
     mv nextflow /opt2/
 
