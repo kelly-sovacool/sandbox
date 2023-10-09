@@ -1,0 +1,32 @@
+name: conditional-inputs
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+    branches:
+      - main
+      - develop
+  workflow_dispatch:
+    inputs:
+      full_run:
+        type: boolean
+        default: false
+        required: true
+
+env:
+  full_run: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.full_run }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: echo
+        run: |
+          echo ${{ env.full_run }}
+      - name: do full run
+        if: ${{ env.full_run}}
+        run: |
+            echo "full run"
