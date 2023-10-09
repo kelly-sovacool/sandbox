@@ -87,18 +87,20 @@ RUN export VERSION=1.11 OS=linux ARCH=amd64 && \
 ENV PATH="/opt2/go/bin/:$PATH"
 RUN go get -u github.com/golang/dep/cmd/dep
 
-# install singularity
-RUN export VERSION=3.9.7 && GO_PATH=/opt2/go \
-    mkdir -p $GOPATH/src/github.com/sylabs && \
-    cd $GOPATH/src/github.com/sylabs && \
+# install singularity https://docs.sylabs.io/guides/3.0/user-guide/installation.html
+RUN export VERSION=3.10.5 \
+    mkdir -p /opt2/go/src/github.com/sylabs && \
+    cd /opt2/go/src/github.com/sylabs && \
     wget https://github.com/sylabs/singularity/releases/download/v${VERSION}/singularity-ce-${VERSION}.tar.gz && \
     tar -xzf singularity-ce-${VERSION}.tar.gz && \
+	cd ./singularity-ce-${VERSION} && \
     ./mconfig --prefix /opt2 \
     make -C ./builddir && \
     make -C ./builddir install
 
 # install nextflow
-RUN wget -qO- https://github.com/nextflow-io/nextflow/releases/download/v23.04.4/nextflow | bash && \
+RUN export VERSION=23.04.4 && \
+	wget -qO- https://github.com/nextflow-io/nextflow/releases/download/v${VERSION}nextflow | bash && \
     chmod +x nextflow && \
     mv nextflow /opt2/
 
@@ -109,6 +111,10 @@ RUN chmod a+r /opt2/Dockerfile_${REPONAME}.${BUILD_TAG}
 #COPY argparse.bash /opt2
 #RUN chmod -R a+rx /opt2/argparse.bash
 ENV PATH="/opt2/:$PATH"
+
+# check install
+RUN which singularity
+RUN which nextflow
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
     apt-get autoclean && \
