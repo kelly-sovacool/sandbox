@@ -78,7 +78,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
 RUN python3 -m pip install --upgrade pip
 
 # install go for singularity
-RUN export VERSION=1.11 OS=linux ARCH=amd64 && \
+RUN export VERSION=1.17 OS=linux ARCH=amd64 && \
     wget https://dl.google.com/go/go$VERSION.$OS-$ARCH.tar.gz && \
     tar -C /opt2 -xzvf go$VERSION.$OS-$ARCH.tar.gz && \
     rm go$VERSION.$OS-$ARCH.tar.gz
@@ -92,7 +92,7 @@ RUN export VERSION=3.10.5 && \
     wget https://github.com/sylabs/singularity/releases/download/v${VERSION}/singularity-ce-${VERSION}.tar.gz && \
     tar -xzf singularity-ce-${VERSION}.tar.gz && \
 	cd ./singularity-ce-${VERSION} && \
-    ./mconfig --prefix /opt2 && \
+    ./mconfig --prefix=/opt2 && \
     make -C ./builddir && \
     make -C ./builddir install
 
