@@ -21,6 +21,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
 	localedef -i en_US -f UTF-8 en_US.UTF-8 && \
 	cpanm FindBin Term::ReadLine
 
+# install dependencies
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
     build-essential \
 	figlet \
@@ -37,6 +38,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
 	libfreetype6-dev \
 	libgd-dev \
 	libgd-perl \
+	libglib2.0-dev \
     libgpgme11-dev \
 	libgs-dev \
 	libgsl-dev \
@@ -80,7 +82,7 @@ RUN python3 -m pip install --upgrade pip
 # install go for singularity
 RUN export VERSION=1.17 OS=linux ARCH=amd64 && \
     wget https://dl.google.com/go/go$VERSION.$OS-$ARCH.tar.gz && \
-    tar -C /opt2 -xzvf go$VERSION.$OS-$ARCH.tar.gz && \
+    tar -C /opt2 -xzf go$VERSION.$OS-$ARCH.tar.gz && \
     rm go$VERSION.$OS-$ARCH.tar.gz
 ENV PATH="/opt2/go/bin/:$PATH"
 
