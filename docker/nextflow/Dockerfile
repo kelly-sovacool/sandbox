@@ -82,7 +82,7 @@ RUN python3 -m pip install --upgrade pip
 # install go for singularity
 RUN export VERSION=1.11 OS=linux ARCH=amd64 && \
     wget https://dl.google.com/go/go$VERSION.$OS-$ARCH.tar.gz && \
-    sudo tar -C /opt2 -xzvf go$VERSION.$OS-$ARCH.tar.gz && \
+    tar -C /opt2 -xzvf go$VERSION.$OS-$ARCH.tar.gz && \
     rm go$VERSION.$OS-$ARCH.tar.gz
 RUN go get -u github.com/golang/dep/cmd/dep
 ENV PATH="/opt2/go/bin/:$PATH"
@@ -95,7 +95,7 @@ RUN export VERSION=3.9.7 && \
     tar -xzf singularity-${VERSION}.tar.gz && \
     ./mconfig --prefix /opt2 \
     make -C ./builddir && \
-    sudo make -C ./builddir install
+    make -C ./builddir install
 
 # install nextflow
 RUN wget -qO- https://github.com/nextflow-io/nextflow/releases/download/v23.04.4/nextflow | bash && \
