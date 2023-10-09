@@ -23,8 +23,6 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
     build-essential \
-	bzip2 \
-	curl \
 	figlet \
 	g++ \
 	gcc \
@@ -108,12 +106,10 @@ RUN export VERSION=23.04.4 && \
 # Save Dockerfile in the docker
 COPY Dockerfile /opt2/Dockerfile_${REPONAME}.${BUILD_TAG}
 RUN chmod a+r /opt2/Dockerfile_${REPONAME}.${BUILD_TAG}
-#COPY argparse.bash /opt2
-#RUN chmod -R a+rx /opt2/argparse.bash
 ENV PATH="/opt2/:$PATH"
 
 # check install
-RUN which singularity
+RUN which singularity 
 RUN which nextflow
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
