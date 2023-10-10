@@ -99,7 +99,7 @@ RUN export VERSION=3.10.5 && \
 
 # install nextflow
 ADD https://www.nextflow.io/releases/v23.04.4/nextflow?a=install /opt2/nextflow 
-RUN bash /opt2/nextflow && \
+RUN bash /opt2/nextflow
 RUN chmod +x /opt2/nextflow
 
 # cleanup etc
