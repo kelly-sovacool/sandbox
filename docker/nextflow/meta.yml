@@ -1,4 +1,4 @@
 dockerhub_namespace: kellysovacool
 image_name: nextflow
-version: v0.0.1
+version: v0.1.0
 container: "$(dockerhub_namespace)/$(image_name):$(version)"
