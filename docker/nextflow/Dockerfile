@@ -98,8 +98,8 @@ RUN export VERSION=3.10.5 && \
     make -C ./builddir install
 
 # install nextflow
-ADD https://www.nextflow.io/releases/v23.04.4/nextflow?a=install /opt2/nextflow 
-RUN bash /opt2/nextflow
+RUN wget -qO- https://www.nextflow.io/releases/v23.04.4/nextflow?a=install | bash
+RUN mv ./nextflow /opt2/nextflow
 RUN chmod +x /opt2/nextflow
 
 # cleanup etc
@@ -110,6 +110,7 @@ ENV PATH="/opt2/:/opt2/bin:$PATH"
 
 # check install
 RUN ls /opt2/
+RUN nextflow -version
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
     apt-get autoclean && \
