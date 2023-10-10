@@ -98,9 +98,9 @@ RUN export VERSION=3.10.5 && \
     make -C ./builddir install
 
 # install nextflow
-RUN wget -qO- https://www.nextflow.io/releases/v23.04.4/nextflow?a=install | bash && \
-    chmod +x ./nextflow && \
-    mv ./nextflow /opt2/
+ADD https://www.nextflow.io/releases/v23.04.4/nextflow?a=install /opt2/nextflow 
+RUN bash /opt2/nextflow && \
+RUN chmod +x /opt2/nextflow
 
 # cleanup etc
 # Save Dockerfile in the docker
