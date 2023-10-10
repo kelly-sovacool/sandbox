@@ -110,8 +110,7 @@ RUN chmod a+r /opt2/Dockerfile_${REPONAME}.${BUILD_TAG}
 ENV PATH="/opt2/:$PATH"
 
 # check install
-RUN which singularity 
-RUN which nextflow
+RUN ls /opt2/
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
     apt-get autoclean && \
