@@ -9,10 +9,9 @@ ARG REPONAME="000000"
 ENV REPONAME=${REPONAME}
 
 # install pandoc
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
-    pandoc
+RUN mamba install pandoc
 
-# install packages from conda environment file
+# install R packages
 COPY r-packages.txt /data2/
 RUN R -e 'install.packages(readLines("r-packages.txt"), repos="http://cran.us.r-project.org")'
 
