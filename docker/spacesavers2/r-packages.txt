@@ -13,7 +13,9 @@ purrr
 readr
 rlang
 rmarkdown
+shiny
 stringr
+thematic
 tibble
 tidyr
 xml2
