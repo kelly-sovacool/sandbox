@@ -79,6 +79,12 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
 
 RUN python3 -m pip install --upgrade pip
 
+# Install conda and give write permissions to conda folder
+RUN echo 'export PATH=/opt2/conda/bin:$PATH' > /etc/profile.d/conda.sh && \
+    wget --quiet "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh" -O ~/miniforge3.sh && \
+    /bin/bash ~/miniforge3.sh -b -p /opt2/conda && \
+    rm ~/miniforge3.sh && chmod 777 -R /opt2/conda/
+
 # install go for singularity
 RUN export VERSION=1.17 OS=linux ARCH=amd64 && \
     wget https://dl.google.com/go/go$VERSION.$OS-$ARCH.tar.gz && \
@@ -98,9 +104,7 @@ RUN export VERSION=3.10.5 && \
     make -C ./builddir install
 
 # install nextflow
-RUN wget -qO- https://www.nextflow.io/releases/v23.04.4/nextflow?a=install | bash
-RUN mv ./nextflow /opt2/nextflow
-RUN chmod +x /opt2/nextflow
+RUN mamba install nextflow=23.04.4
 
 # cleanup etc
 # Save Dockerfile in the docker
@@ -109,7 +113,6 @@ RUN chmod a+r /opt2/Dockerfile_${REPONAME}.${BUILD_TAG}
 ENV PATH="/opt2/:/opt2/bin:$PATH"
 
 # check install
-RUN ls /opt2/
 RUN nextflow -version
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
