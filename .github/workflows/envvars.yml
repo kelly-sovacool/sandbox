@@ -11,7 +11,7 @@ jobs:
     steps:
       - name: set env var
         run: |
-          echo "VAR2=hello" >> >> $GITHUB_ENV
+          echo "VAR2=hello" >> $GITHUB_ENV
       - name: check vars
         run: |
           echo $VAR1 $VAR2
