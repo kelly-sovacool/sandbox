@@ -1,0 +1,18 @@
+name: Env Variables
+
+on: workflow_dispatch
+
+env:
+  VAR1: hello
+
+jobs:
+  check_var:
+    runs-on: ubuntu-latest
+    steps:
+      - name: set env var
+        run: |
+          echo "VAR2=hello" >> >> $GITHUB_ENV
+      - name: check vars
+        run: |
+          echo $VAR1 $VAR2
+          echo ${{ env.VAR1 }} ${{ env.VAR2 }}
