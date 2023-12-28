@@ -38,18 +38,18 @@ jobs:
             echo "github event_name is ${{ github.event_name }}"
             echo "the version tag is ${{ steps.vars.outputs.VERSION_TAG }}"
 
-      # - name: Login to DockerHub
-      #   if: ${{ github.event_name != 'pull_request' }}
-      #   uses: docker/login-action@v2
-      #   with:
-      #     username: ${{ secrets.DOCKERHUB_USERNAME }}
-      #     password: ${{ secrets.DOCKERHUB_TOKEN }}
-      # - name: Build and push
-      #   uses: docker/build-push-action@v4
-      #   with:
-      #     push: ${{ github.event_name != 'pull_request' }}
-      #     tags: $NAMESPACE/$IMAGE_NAME:${{ steps.vars.outputs.VERSION_TAG }}
-      #     build-args: |
-      #       BUILD_DATE=${{ steps.vars.outputs.DATE }}
-      #       BUILD_TAG=${{ steps.vars.outputs.VERSION_TAG }}
-      #       REPONAME=$IMAGE_NAME
+      - name: Login to DockerHub
+        if: ${{ github.event_name != 'pull_request' }}
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Build and push
+        uses: docker/build-push-action@v4
+        with:
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: $NAMESPACE/$IMAGE_NAME:${{ steps.vars.outputs.VERSION_TAG }}
+          build-args: |
+            BUILD_DATE=${{ steps.vars.outputs.DATE }}
+            BUILD_TAG=${{ steps.vars.outputs.VERSION_TAG }}
+            REPONAME=$IMAGE_NAME
