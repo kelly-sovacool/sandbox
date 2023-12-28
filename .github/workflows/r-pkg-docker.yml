@@ -1,10 +1,11 @@
-name: build-docker
+name: r-pkg-docker
 
 on:
   push:
     paths:
       - "r.sandbox/**"
       - '.github/workflows/r-pkg-docker.yml'
+  workflow_dispatch:
   release:
     types: [published]
 
@@ -21,6 +22,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: r-lib/actions/setup-r@v2
       - uses: r-lib/actions/setup-r-dependencies@v2
+        working-directory: 'r.sandbox'
       - name: Prepare build-time variables
         id: vars
         run: |
