@@ -21,6 +21,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: r-lib/actions/setup-r@v2
+      - uses: r-lib/actions/setup-r-dependencies@v2
         with:
           working-directory: 'r.sandbox'
       - name: Prepare build-time variables
@@ -32,7 +33,7 @@ jobs:
               VERSION=${{ github.ref_name }}
             else
               HASH=$(echo "${{ github.sha }}" | cut -c1-7)
-              VERSION="$(Rscript -e "cat(as.character(desc::desc_get_version(file = 'description')))")_$HASH"
+              VERSION="$(Rscript -e "cat(as.character(desc::desc_get_version(file = '$CONTEXT/DESCRIPTION')))")_$HASH"
             fi
             echo "VERSION_TAG=$(echo $VERSION)" >> "$GITHUB_OUTPUT"
       - name: debug
