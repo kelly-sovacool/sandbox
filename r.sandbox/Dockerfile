@@ -21,12 +21,56 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
 
 # install basic dependencies with apt-get
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
-    build-essential \
+  build-essential \
 	g++ \
 	gcc \
 	gfortran \
+	git \
+	libatlas-base-dev \
+	libblas-dev \
+	libboost-dev \
+	libbz2-dev \
+	libcurl4-openssl-dev \
+	libexpat1-dev \
+	libfreetype6-dev \
+	libgd-dev \
+	libgd-perl \
+	libglib2.0-dev \
+  libgpgme11-dev \
+	libgs-dev \
+	libgsl-dev \
+	libgsl0-dev \
+	libhtml-template-compiled-perl \
+	libicu-dev \
+	libjudy-dev \
+	liblapack-dev \
+	liblzma-dev \
+	libmysqlclient-dev \
+	libncurses-dev \
+	libopenmpi-dev \
+	libpng-dev \
+	librtmp-dev \
+  libseccomp-dev \
+	libssl-dev \
+	libtool \
+	libxml-libxml-debugging-perl \
+	libxml-opml-simplegen-perl \
+	libxml2-dev \
+	libxslt-dev \
+	make \
+	manpages-dev \
+	openjdk-17-jre-headless \
+	parallel \
+	pigz \
+  pkg-config \
+	rsync \
+  squashfs-tools \
 	unzip \
-	wget
+  uuid-dev \
+	wget \
+	zlib1g \
+	zlib1g-dev \
+	zlibc
 
 # Install conda and give write permissions to conda folder
 RUN echo 'export PATH=/opt2/conda/bin:$PATH' > /etc/profile.d/conda.sh && \
