@@ -14,10 +14,10 @@ jobs:
   cleanup:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0
-      - uses: CCBR/actions/post-release@release-tags
+      - uses: CCBR/actions/post-release@copilot/support-r-package-structure
         with:
           github-token: ${{ github.token }}
-          update-sliding-tags: true
+          update-sliding-tags: false
